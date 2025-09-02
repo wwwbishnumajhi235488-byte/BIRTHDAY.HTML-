@@ -1,0 +1,102 @@
+<!doctype html>
+
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Birthday Card - Day Theme</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans Bengali', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #a3d8f4, #fef9c3);
+      color: #333;
+      padding: 20px;
+    }
+    .card {
+      background: #ffffffee;
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative;
+    }
+    .cake {
+      font-size: 60px;
+      margin-bottom: 15px;
+    }
+    .message {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .from {
+      font-weight: 600;
+      margin-bottom: 20px;
+      opacity: 0.85;
+    }
+    .credit {
+      font-size: 0.75rem;
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: #555;
+    }
+    .share-btn {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #ff7ab6, #ffd166);
+      color: #08101b;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="cake">🎂</div>
+    <div class="message" id="messageText">শুভ জন্মদিন, Anirban! তোমার দিনটা আনন্দে ভরে উঠুক।</div>
+    <div class="from" id="fromText">— From: Bishnu</div>
+    <button class="share-btn" id="shareWhats">WhatsApp দিয়ে পাঠাও</button>
+    <button class="share-btn" id="copyLink">লিংক কপি করো</button>
+    <div class="credit">© Bishnu</div>
+  </div>  <script>
+    const defaultFrom = decodeURIComponent(new URLSearchParams(location.search).get('from') || 'Bishnu');
+    const defaultTo = decodeURIComponent(new URLSearchParams(location.search).get('to') || 'Anirban');
+
+    const fromText = document.getElementById('fromText');
+    const messageText = document.getElementById('messageText');
+
+    fromText.textContent = `— From: ${defaultFrom}`;
+    messageText.textContent = `শুভ জন্মদিন, ${defaultTo}! তোমার দিনটা আনন্দে ভরে উঠুক।`;
+
+    document.getElementById('shareWhats').addEventListener('click', ()=>{
+      const from = encodeURIComponent(defaultFrom);
+      const to = encodeURIComponent(defaultTo);
+      const url = location.origin + location.pathname + `?from=${from}` + (to?`&to=${to}`:'');
+      const text = encodeURIComponent(`আমি তোমাকে একটা জন্মদিনের কার্ড পাঠালাম: ${url}`);
+      const wa = `https://wa.me/?text=${text}`;
+      window.open(wa,'_blank');
+    });
+
+    document.getElementById('copyLink').addEventListener('click', async ()=>{
+      const from = encodeURIComponent(defaultFrom);
+      const to = encodeURIComponent(defaultTo);
+      const url = location.origin + location.pathname + `?from=${from}` + (to?`&to=${to}`:'');
+      try{
+        await navigator.clipboard.writeText(url);
+        alert('লিংক কপি করা হয়েছে — এখন পেস্ট করে পাঠিয়ে দিন।');
+      }catch(e){
+        prompt('Copy this link manually:', url);
+      }
+    });
+  </script></body>
+</html>
