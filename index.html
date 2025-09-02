@@ -1,102 +1,170 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Birthday Card - Day Theme</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans Bengali', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: linear-gradient(to bottom, #a3d8f4, #fef9c3);
-      color: #333;
-      padding: 20px;
-    }
-    .card {
-      background: #ffffffee;
-      border-radius: 20px;
-      padding: 20px;
-      max-width: 400px;
-      width: 100%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      text-align: center;
-      position: relative;
-    }
-    .cake {
-      font-size: 60px;
-      margin-bottom: 15px;
-    }
-    .message {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-    .from {
-      font-weight: 600;
-      margin-bottom: 20px;
-      opacity: 0.85;
-    }
-    .credit {
-      font-size: 0.75rem;
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      color: #555;
-    }
-    .share-btn {
-      padding: 10px 15px;
-      margin: 5px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(90deg, #ff7ab6, #ffd166);
-      color: #08101b;
-      font-weight: 600;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>শুভ জন্মদিন!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);
+            color: #333;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+            animation: backgroundPulse 10s infinite alternate;
+        }
+
+        @keyframes backgroundPulse {
+            0% { background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%); }
+            100% { background: linear-gradient(135deg, #f8b500 0%, #fceabb 100%); }
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            max-width: 90%;
+            width: 500px;
+            animation: fadeInScale 1.8s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #e91e63;
+            font-size: 3em;
+            margin-bottom: 10px;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+            0% { opacity: 0; transform: scale3d(.3, .3, .3); }
+            20% { transform: scale3d(1.1, 1.1, 1.1); }
+            40% { transform: scale3d(.9, .9, .9); }
+            60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+            80% { transform: scale3d(.97, .97, .97); }
+            100% { opacity: 1; transform: scale3d(1, 1, 1); }
+        }
+
+        .message {
+            font-size: 1.2em;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        .photo-container {
+            margin: 20px 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .photo {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            animation: pulsePhoto 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulsePhoto {
+            0% { transform: scale(1); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
+            100% { transform: scale(1.05); box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25); }
+        }
+
+        .celebration-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5em;
+            color: #ff5722;
+            margin-top: 15px;
+            animation: slideInUp 1s ease-out forwards;
+        }
+
+        @keyframes slideInUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #f0f;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fallConfetti 5s linear infinite;
+            z-index: 1;
+        }
+        .confetti:nth-child(2n) { background-color: #ff0; width: 10px; height: 10px; border-radius: 0; transform: rotate(45deg); }
+        .confetti:nth-child(3n) { background-color: #0ff; width: 6px; height: 12px; border-radius: 2px; }
+        .confetti:nth-child(4n) { background-color: #0f0; }
+        .confetti:nth-child(5n) { background-color: #f00; width: 12px; height: 6px; border-radius: 2px; }
+        .confetti:nth-child(6n) { background-color: #ff9800; }
+        .confetti:nth-child(7n) { background-color: #9c27b0; }
+
+        @keyframes fallConfetti {
+            0% { transform: translateY(-100px) rotateZ(0deg); opacity: 0; }
+            5% { opacity: 1; }
+            100% { transform: translateY(100vh) rotateZ(720deg); opacity: 0; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2em; }
+            .message { font-size: 1em; }
+            .photo { width: 120px; height: 120px; }
+            .celebration-text { font-size: 1.2em; }
+            .container { padding: 20px; }
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <div class="cake">🎂</div>
-    <div class="message" id="messageText">শুভ জন্মদিন, Anirban! তোমার দিনটা আনন্দে ভরে উঠুক।</div>
-    <div class="from" id="fromText">— From: Bishnu</div>
-    <button class="share-btn" id="shareWhats">WhatsApp দিয়ে পাঠাও</button>
-    <button class="share-btn" id="copyLink">লিংক কপি করো</button>
-    <div class="credit">© Bishnu</div>
-  </div>  <script>
-    const defaultFrom = decodeURIComponent(new URLSearchParams(location.search).get('from') || 'Bishnu');
-    const defaultTo = decodeURIComponent(new URLSearchParams(location.search).get('to') || 'Anirban');
+    <div class="container">
+        <h1>শুভ জন্মদিন! 🎂🎉</h1>
+        <div class="photo-container">
+            <img src="friend.jpg" alt="বন্ধুর ছবি" class="photo">
+        </div>
+        <p class="message">
+            প্রিয় বন্ধু,<br>
+            তোমার জন্মদিন উপলক্ষে আমার পক্ষ থেকে অনেক অনেক শুভেচ্ছা। তোমার জীবন খুশিতে ভরে উঠুক এবং তোমার সব স্বপ্ন পূরণ হোক।
+            এই দিনটা তোমার জন্য খুব স্পেশাল হোক।<br>
+            সবসময় ভালো থেকো!
+        </p>
+        <p class="celebration-text">চলো কেক কাটি এবং আনন্দ করি! 🍰🥳</p>
+        <p style="font-size: 1.1em; color: #666; margin-top: 20px;">শুভেচ্ছান্তে,<br>Anirban 🔥<br>Have a great day bro<br> by The BM</p>
+    </div>
 
-    const fromText = document.getElementById('fromText');
-    const messageText = document.getElementById('messageText');
-
-    fromText.textContent = `— From: ${defaultFrom}`;
-    messageText.textContent = `শুভ জন্মদিন, ${defaultTo}! তোমার দিনটা আনন্দে ভরে উঠুক।`;
-
-    document.getElementById('shareWhats').addEventListener('click', ()=>{
-      const from = encodeURIComponent(defaultFrom);
-      const to = encodeURIComponent(defaultTo);
-      const url = location.origin + location.pathname + `?from=${from}` + (to?`&to=${to}`:'');
-      const text = encodeURIComponent(`আমি তোমাকে একটা জন্মদিনের কার্ড পাঠালাম: ${url}`);
-      const wa = `https://wa.me/?text=${text}`;
-      window.open(wa,'_blank');
-    });
-
-    document.getElementById('copyLink').addEventListener('click', async ()=>{
-      const from = encodeURIComponent(defaultFrom);
-      const to = encodeURIComponent(defaultTo);
-      const url = location.origin + location.pathname + `?from=${from}` + (to?`&to=${to}`:'');
-      try{
-        await navigator.clipboard.writeText(url);
-        alert('লিংক কপি করা হয়েছে — এখন পেস্ট করে পাঠিয়ে দিন।');
-      }catch(e){
-        prompt('Copy this link manually:', url);
-      }
-    });
-  </script></body>
+    <script>
+        // Confetti animation
+        const body = document.body;
+        for (let i = 0; i < 70; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = `${Math.random() * 100}vw`;
+            confetti.style.animationDelay = `${Math.random() * 3}s`;
+            confetti.style.animationDuration = `${4 + Math.random() * 3}s`;
+            body.appendChild(confetti);
+        }
+    </script>
+</body>
 </html>
